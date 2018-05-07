@@ -214,5 +214,10 @@ module GHDeck
 
 			assert_equal(entry, @deck.roll())
 		end
+
+		def test_shuffle_remainder_of_deck_when_adding()
+			# TODO
+			assert_true(false)
+		end
 	end
 end
