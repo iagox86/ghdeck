@@ -1,0 +1,47 @@
+PATH
+  remote: .
+  specs:
+    ghdeck (0.1.0)
+      rack-robustness (~> 1.1.0)
+      sinatra (~> 2.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    docile (1.1.5)
+    json (2.1.0)
+    minitest (5.11.3)
+    mustermann (1.0.2)
+    power_assert (1.1.1)
+    rack (2.0.5)
+    rack-protection (2.0.1)
+      rack
+    rack-robustness (1.1.0)
+    rake (10.5.0)
+    simplecov (0.15.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
+    sinatra (2.0.1)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.1)
+      tilt (~> 2.0)
+    test-unit (3.2.7)
+      power_assert
+    tilt (2.0.8)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.16)
+  ghdeck!
+  minitest (~> 5.0)
+  rake (~> 10.0)
+  simplecov (~> 0.15.1)
+  test-unit (~> 3.2.7)
+
+BUNDLED WITH
+   1.16.1
