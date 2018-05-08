@@ -6,9 +6,13 @@ require 'rack/robustness'
 require 'ghdeck'
 require 'ghdeck/cards'
 require 'ghdeck/deck'
+require 'ghdeck/decks'
 require 'ghdeck/logger'
 
 module GHDeck
+	CARDS = Cards.new(filename: '~/.ghdeck/available_cards')
+	DECKS = Decks.new(filename: '~/.ghdeck/decks', cards: CARDS)
+
   class Server < Sinatra::Base
     def initialize(*args)
       super(*args)
@@ -61,33 +65,49 @@ module GHDeck
       end
     end
 
+		# Cards api
     get '/api/cards' do
+			return CARDS.get()
     end
 
-		post '/api/card/add' do
+		post '/api/cards' do
+			CARDS.add(**@body)
 		end
 
-		delete '/api/card/:id' do |id|
+		delete '/api/cards/:id' do |id|
+			CARDS.delete(id)
+		end
+
+		# Decks API
+		get '/api/decks' do
+			return DECKS.get()
 		end
 
 		post '/api/decks' do
+			DECKS.add(**@body)
 		end
 
-		put '/api/deck/:id' do |id|
+		delete '/api/decks/:id' do |id|
+			DECKS.delete(id)
 		end
 
-		post '/api/deck' do
-      id = SecureRandom.uuid()
-			puts(id)
+		# Decks cards API
+		get '/api/decks/:id/cards' do |id|
+			return DECKS.get_cards_for(id)
 		end
 
-		delete '/api/deck/:id' do |id|
+		post '/api/decks/:id/cards' do |id|
+			DECKS.add_card(
+				id: id,
+				card_id: @body[:card_id],
+			)
 		end
 
-		put '/api/deck/:id' do
-		end
-
-		get '/api/deck/:id/roll' do |id|
+		delete '/api/decks/:id/cards/:card_id' do |id, card_id|
+			DECKS.delete_card(
+				id: id,
+				card_id: card_id
+			)
 		end
   end
 end
